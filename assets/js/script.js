@@ -16,25 +16,29 @@ currentDayEl.text(currentDay);
 
 // Set colour of timeblock based on current time
 
-var descriptionEl = $('.description');
+var descriptionEls = $('.description');
 
-var currentHour = currentTime.format('H');
+var currentHour = parseInt(currentTime.format('H'));
 
-descriptionEl.each(function() {
-    var rowHour = descriptionEl.attr("data-hour");
+for (var i = 0; i < descriptionEls.length; i++) {
+    var descriptionEl = descriptionEls[i];
+
+    var rowHour = parseInt(descriptionEl.dataset.hour);
 
     console.log(rowHour);
     console.log(currentHour);
 
     if (rowHour < currentHour) {
         descriptionEl.addClass('past');
+        console.log("past");
     } else if (rowHour = currentHour) {
         descriptionEl.addClass('present');
-    } else {
+        console.log("present");
+    } else if (rowHour > currentHour) {
         descriptionEl.addClass('future');
+        console.log("future");
     };
-});
-
+}
 
 
 
