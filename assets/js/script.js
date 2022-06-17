@@ -8,6 +8,7 @@
 
 
 var currentTime = moment();
+var currentHour = parseInt(currentTime.format('H'));
 
 // Display current date at top of calendar
 var currentDayEl = $('#currentDay');
@@ -16,8 +17,6 @@ currentDayEl.text(currentDay);
 
 // Set colour of timeblock based on current time
 var descriptionEls = $('.description');
-
-var currentHour = parseInt(currentTime.format('H'));
 
 for (var i = 0; i < descriptionEls.length; i++) {
     var descriptionEl = descriptionEls[i];
@@ -60,10 +59,18 @@ function showSavedEvents() {
         var savedDescription = JSON.parse(localStorage.getItem(descriptionID));
 
         if (savedDescription !== null) {
-            descriptionEl.text(savedDescription);
+            descriptionEl.textContent = savedDescription;
         }
     }
-
 }
 
 window.onload = showSavedEvents();
+
+// Clear local storage between end of one day and start of another
+function clearLocalStorage() {
+    if (currentHour >= 18 || currentHour < 9) {
+        localStorage.clear();
+    }
+}
+
+clearLocalStorage();
