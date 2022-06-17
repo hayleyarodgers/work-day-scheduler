@@ -16,9 +16,8 @@ currentDayEl.text(currentDay);
 
 // Set colour of timeblock based on current time
 var descriptionEls = $('.description');
-// var currentHour = parseInt(currentTime.format('H'));
 
-var currentHour = 11;
+var currentHour = parseInt(currentTime.format('H'));
 
 for (var i = 0; i < descriptionEls.length; i++) {
     var descriptionEl = descriptionEls[i];
@@ -54,8 +53,16 @@ var saveButtons = $('.fas');
 saveButtons.on('click', saveEvent);
 
 // When page loads, check local storage for events and print on page
-
 function showSavedEvents() {
+    for (var i = 0; i < descriptionEls.length; i++) {
+        var descriptionEl = descriptionEls[i];
+        var descriptionID = descriptionEl.id;
+        var savedDescription = JSON.parse(localStorage.getItem(descriptionID));
+
+        if (savedDescription !== null) {
+            descriptionEl.text(savedDescription);
+        }
+    }
 
 }
 
