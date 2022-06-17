@@ -6,7 +6,7 @@
     5. =
 */
 
-// 
+
 var currentTime = moment();
 
 // Display current date at top of calendar
@@ -15,9 +15,7 @@ var currentDay = currentTime.format('dddd, MMMM Do');
 currentDayEl.text(currentDay);
 
 // Set colour of timeblock based on current time
-
 var descriptionEls = $('.description');
-
 var currentHour = parseInt(currentTime.format('H'));
 
 for (var i = 0; i < descriptionEls.length; i++) {
@@ -25,21 +23,29 @@ for (var i = 0; i < descriptionEls.length; i++) {
 
     var rowHour = parseInt(descriptionEl.dataset.hour);
 
-    console.log(rowHour);
-    console.log(currentHour);
-
     if (rowHour < currentHour) {
-        descriptionEl.addClass('past');
-        console.log("past");
-    } else if (rowHour = currentHour) {
-        descriptionEl.addClass('present');
-        console.log("present");
+        descriptionEl.classList.add("past");
+    } else if (rowHour === currentHour) {
+        descriptionEl.classList.add("present");
     } else if (rowHour > currentHour) {
-        descriptionEl.addClass('future');
-        console.log("future");
+        descriptionEl.classList.add("future");
     };
 }
 
-
-
 // Add event to local storage
+var saveButtons = $('.saveBtn');
+
+function saveEvents() {
+
+}
+
+saveButtons.on('click', saveEvents());
+
+// When page loads, check local storage for events and print on page
+
+function showSavedEvents() {
+
+}
+
+window.on('load', showSavedEvents());
+
